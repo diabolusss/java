@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+X-COMMENT: Main-Class will be added automatically by build
+Main-Class: org.custom.RunServer
+Class-Path: lib/Java-WebSocketMaster.jar lib/javax.mail.jar
+

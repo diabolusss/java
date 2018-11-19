@@ -1,0 +1,28 @@
+# Configuration file for javax.mail 
+
+## Gmail account FROM:
+mail.username=vkursedotcom@gmail.com
+mail.password=typr00t_
+
+# send message copy?
+mail.cc.enabled=true
+
+# where to send it
+mail.cc.to=vkursedotcom@gmail.com
+
+## TO:
+mail.to=37126732657@sms.tele2.lv
+#sms.forward.26732657@inbox.lv
+
+## Settings
+mail.smtp.host=smtp.gmail.com
+mail.smtp.auth=true
+
+## Gmail TLS
+mail.smtp.starttls.enable=true
+mail.smtp.port=587
+
+## Gmail SSL
+#mail.smtp.socketFactory.port=465
+#mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory
+#mail.smtp.port=465

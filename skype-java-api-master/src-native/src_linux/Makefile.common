@@ -1,0 +1,34 @@
+JDK_DIR = /usr/lib/jvm/java-6-openjdk-amd64/
+CC = gcc
+CFLAGS = -Wall -pipe -g -fPIC -I../commons 
+INCPATH = -I. -I$(JDK_DIR)/include -I$(JDK_DIR)/include/linux
+LOGGING=../commons/Logging.c
+LINK = g++
+LD_FLAGS = -shared 
+PROJECT_ROOT=../../..
+TARGET_CLASSES=$(PROJECT_ROOT)/target/classes
+TARGET=$(PROJECT_ROOT)/src/main/resources/
+OBJECTS = $(SOURCES:.c=.o)
+OBJECTS_X64 = $(SOURCES:.c=_x64.o)
+
+PWD=$(shell pwd)
+IMPLEMENTATION=$(shell basename $(PWD))
+X86=libskype_$(IMPLEMENTATION)_x86.so
+X64=libskype_$(IMPLEMENTATION)_x64.so
+
+startfrom: all
+
+com_skype_connector_linux_SkypeFramework.h:
+	javah -classpath $(TARGET_CLASSES) com.skype.connector.linux.SkypeFramework
+
+SkypeFramework: com_skype_connector_linux_SkypeFramework.h SkypeFramework.c
+	$(CC) -c $(CFLAGS) $(INCPATH) -m32 -o $@.o $@.c
+	$(CC) -c $(CFLAGS) $(INCPATH) -m64 -o $@_x64.o $@.c
+
+Logging: com_skype_connector_linux_SkypeFramework.h $(LOGGING)
+	$(CC) -c $(CFLAGS) $(INCPATH) -m32 -o $@.o $(LOGGING)
+	$(CC) -c $(CFLAGS) $(INCPATH) -m64 -o $@_x64.o $(LOGGING)
+
+
+clean:
+	rm -f com_skype_connector_linux_SkypeFramework.h *.o *.so skypetest

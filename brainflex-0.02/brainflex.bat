@@ -1,0 +1,1 @@
+java -cp bin;jssc.jar;commons-math3-3.3.jar mobi.omegacentauri.brainflex.BrainFlex
